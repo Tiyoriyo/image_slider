@@ -82,7 +82,6 @@ function moveStrip(string) {
         console.log(x);
     }
 
-    console.log(navbar);
     switch (x) {
         case 0:
             for (let i = 0; i < navbar.length; i += 1) {
@@ -133,9 +132,17 @@ function createModule() {
     prevBtn.innerHTML = '&#8592;';
     nextBtn.innerHTML = '&#8594;';
 
-    nextBtn.addEventListener('click', () => {moveStrip('next')});
+    nextBtn.addEventListener('click', () => {
+        moveStrip('next');
+        clearInterval(automaticSlide);
+        automaticSlide = setInterval(automaticNextImage, 5000);
+    });
 
-    prevBtn.addEventListener('click', () => {moveStrip('prev')});
+    prevBtn.addEventListener('click', () => {
+        moveStrip('prev');
+        clearInterval(automaticSlide);
+        automaticSlide = setInterval(automaticNextImage, 5000);
+    });
 
     container.append(prevBtn, frame, nextBtn);
     return container;
@@ -143,5 +150,17 @@ function createModule() {
 
 body.appendChild(createModule());
 
+function automaticNextImage() {
+    if (x !== -1500) {
+        moveStrip('next');
+    } else if (x == -1500) {
+        const strip = document.querySelector('.p-strip');
+        strip.style.transform = 'translate(375px)'
+        x = 375;
+        moveStrip('next');
+    }
+}
+
+let automaticSlide = setInterval(automaticNextImage, 5000);
 
 
