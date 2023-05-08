@@ -53,6 +53,8 @@ function createNavDots() {
         container.append(circle);
     }
 
+    container.children[0].classList.add('active');
+
     addCircleMoveEvent();
     console.log(container.children)
 
@@ -71,6 +73,7 @@ let x = 0;
 
 function moveStrip(string) {
     const strip = document.querySelector('.p-strip');
+    const navbar = document.querySelectorAll('.navdot');
     if (string == 'next' && x !== -1500) {
         x -= 375;
         console.log(x);
@@ -78,6 +81,42 @@ function moveStrip(string) {
         x += 375;
         console.log(x);
     }
+
+    console.log(navbar);
+    switch (x) {
+        case 0:
+            for (let i = 0; i < navbar.length; i += 1) {
+                navbar[i].classList.remove('active');
+            }
+            navbar[0].classList.add('active');
+            break;
+        case -375:
+            for (let i = 0; i < navbar.length; i += 1) {
+                navbar[i].classList.remove('active');
+            }
+            navbar[1].classList.add('active');
+            break;
+        case -750:
+            for (let i = 0; i < navbar.length; i += 1) {
+                navbar[i].classList.remove('active');
+            }
+            navbar[2].classList.add('active');
+            break;
+        case -1125:
+            for (let i = 0; i < navbar.length; i += 1) {
+                navbar[i].classList.remove('active');
+            }
+            navbar[3].classList.add('active');
+            break;
+        case -1500:
+            for (let i = 0; i < navbar.length; i += 1) {
+                navbar[i].classList.remove('active');
+            }
+            navbar[4].classList.add('active');
+            break;
+    }
+
+
     strip.style.transform = `translate(${x}px)`
 }
 
